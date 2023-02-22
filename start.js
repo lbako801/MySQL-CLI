@@ -1,11 +1,25 @@
-const inquirer = require('inquirer');
-const express = require('express');
-const mysql = require('mysql2');
-const cTable = require('console.table');
-const cliPrompt = require('./prompts/prompts');
+const inquirer = require("inquirer");
+const express = require("express");
+const mysql = require("mysql2");
+const cTable = require("console.table");
+const cliPrompt = require("./prompts/prompts");
+const {
+  viewAllDepartments,
+  viewAllRoles,
+  viewAllEmployees,
+  addDepartment,
+  addRole,
+  addEmployee,
+  updateEmployeeRole,
+  deleteDepartment,
+  deleteRole,
+  deleteEmployee,
+  viewEmployeesByManager,
+  viewEmployeesByDepartment,
+  viewDepartmentBudget,
+} = require("./db/queries");
 
-let ascii_text_generator = require('ascii-text-generator');
-
+let ascii_text_generator = require("ascii-text-generator");
 
 const app = express();
 
@@ -13,12 +27,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 function startCLI() {
-    let input_text = "CLI PRO";
-    console.log(ascii_text_generator(input_text, "2"));
-    console.log("");
-    console.log("");
+  let input_text = "CLI PRO";
+  console.log(ascii_text_generator(input_text, "2"));
+  console.log("");
+  console.log("");
 
-    cliPrompt();
-};
+  cliPrompt();
+}
 
 startCLI();

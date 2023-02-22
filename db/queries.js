@@ -1,5 +1,3 @@
-const connection = require("./connection");
-
 // function to view all departments
 function viewAllDepartments() {
   connection
@@ -37,16 +35,19 @@ function addDepartment(departmentName) {
   const query = `INSERT INTO department (name) VALUES ("${departmentName}")`;
   return connection.promise().query(query);
 }
+// function to add a role
 
 function addRole(title, salary, departmentId) {
   const query = `INSERT INTO role (title, salary, department_id) VALUES ("${title}", ${salary}, ${departmentId})`;
   return connection.promise().query(query);
 }
+// function to add an employee
 
 function addEmployee(firstName, lastName, roleId, managerId) {
   const query = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("${firstName}", "${lastName}", ${roleId}, ${managerId})`;
   return connection.promise().query(query);
 }
+// function to update an employee
 
 function updateEmployeeRole(employeeId, roleId) {
   const query = `UPDATE employee SET role_id = ${roleId} WHERE id = ${employeeId}`;
@@ -97,3 +98,19 @@ function viewDepartmentBudget(departmentId) {
     GROUP BY department.id`;
   return connection.promise().query(query);
 }
+
+module.exports = { 
+  viewAllDepartments, 
+  viewAllRoles, 
+  viewAllEmployees,
+  addDepartment,
+  addRole,
+  addEmployee,
+  updateEmployeeRole,
+  deleteDepartment,
+  deleteRole,
+  deleteEmployee,
+  viewEmployeesByManager,
+  viewEmployeesByDepartment,
+  viewDepartmentBudget
+};
