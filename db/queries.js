@@ -1,3 +1,28 @@
+const connection = require('./connection');
+
+// function to view all departments
+function viewAllDepartments() {
+  connection
+    .promise()
+    .query("SELECT * FROM department")
+    .then(([rows, fields]) => {
+      console.table(rows);
+    })
+    .catch((err) => console.log(err));
+}
+
+// function to view all roles
+function viewAllRoles() {
+  connection
+    .promise()
+    .query("SELECT * FROM role")
+    .then(([rows, fields]) => {
+      console.table(rows);
+    })
+    .catch((err) => console.log(err));
+}
+
+// function to view all employees
 // function to view all departments
 function viewAllDepartments() {
   connection
