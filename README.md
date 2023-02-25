@@ -1,4 +1,4 @@
-# MySQL-CLI- AN Employee Database Management System
+# CLI-PRO- AN Employee Database Management System
 Welcome to the Employee Database Management System! This is a command-line application that allows business owners to view and manage the departments, roles, and employees in their company. With this application, you can easily organize and plan your business.
 # Table of Contents
 - [MySQL-CLI- AN Employee Database Management System](#mysql-cli--an-employee-database-management-system)
