@@ -81,7 +81,7 @@ The Employee Database Management System uses a MySQL database with the following
 
 This database schema allows you to easily store and manage information about your company's departments, roles, and employees.
 # Demo and Screenshots
-Demo Video - [VIDEO]()
+Demo Video - [VIDEO](https://drive.google.com/file/d/1H4YLHbIPz_PXmNBR3eS2bVtk-GhmPZWx/view)
 # Author
 This Employee Database Management System was developed by [Loren Bako (me)](https://github.com/lbako801). If you have any questions or feedback, please contact me at loren@lorenbako.com or visit my website at [lorenbako.com](https://lorenbako.com). 
 
