@@ -13,7 +13,7 @@ Welcome to the Employee Database Management System! This is a command-line appli
 # Installation
 To use the Employee Database Management System, you will need to have Node.js, MySQL2, Inquirer, and console.table installed on your computer. If you do not already have these packages installed, you can run the following command in your terminal to install them:
 ```
-npm i inquirer@8.2.4 mysql2 console.table
+npm install
 ```
 Once you have installed the necessary packages, you can clone this repository to your local machine.
 
