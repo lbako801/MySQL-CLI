@@ -13,9 +13,12 @@ Welcome to the Employee Database Management System! This is a command-line appli
 # Installation
 To use the Employee Database Management System, you will need to have Node.js, MySQL2, Inquirer, and console.table installed on your computer. If you do not already have these packages installed, you can run the following command in your terminal to install them:
 ```
-npm i inquirer@8.2.4 mysql2 console.table
+npm install
 ```
-Once you have installed the necessary packages, you can clone this repository to your local machine.
+Once you have installed the necessary packages, you can clone this repository to your local machine with the following command:
+```
+git@github.com:lbako801/MySQL-CLI.git
+```
 
 # Usage 
 To use the Employee Database Management System, follow these steps:
@@ -24,7 +27,7 @@ To use the Employee Database Management System, follow these steps:
 
 2. Start the application by running the following command:
 ```
-npm run cli-pro
+npm run clipro
 ```
 3. You will be presented with a menu of options. Select the option you want to use by using the arrow keys to navigate and the Enter key to select.
 
