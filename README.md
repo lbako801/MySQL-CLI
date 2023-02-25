@@ -15,7 +15,10 @@ To use the Employee Database Management System, you will need to have Node.js, M
 ```
 npm install
 ```
-Once you have installed the necessary packages, you can clone this repository to your local machine.
+Once you have installed the necessary packages, you can clone this repository to your local machine with the following command:
+```
+git@github.com:lbako801/MySQL-CLI.git
+```
 
 # Usage 
 To use the Employee Database Management System, follow these steps:
