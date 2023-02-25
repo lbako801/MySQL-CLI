@@ -6,6 +6,8 @@ function viewAllDepartments() {
     .promise()
     .query("SELECT * FROM department")
     .then(([rows, fields]) => {
+      console.log("");
+
       console.table(rows);
     })
     .catch((err) => console.log(err));
@@ -17,29 +19,8 @@ function viewAllRoles() {
     .promise()
     .query("SELECT * FROM role")
     .then(([rows, fields]) => {
-      console.table(rows);
-    })
-    .catch((err) => console.log(err));
-}
+      console.log("");
 
-// function to view all employees
-// function to view all departments
-function viewAllDepartments() {
-  connection
-    .promise()
-    .query("SELECT * FROM department")
-    .then(([rows, fields]) => {
-      console.table(rows);
-    })
-    .catch((err) => console.log(err));
-}
-
-// function to view all roles
-function viewAllRoles() {
-  connection
-    .promise()
-    .query("SELECT * FROM role")
-    .then(([rows, fields]) => {
       console.table(rows);
     })
     .catch((err) => console.log(err));
@@ -51,6 +32,7 @@ function viewAllEmployees() {
     .promise()
     .query("SELECT * FROM employee")
     .then(([rows, fields]) => {
+      console.log("");
       console.table(rows);
     })
     .catch((err) => console.log(err));
@@ -72,8 +54,8 @@ function addEmployee(firstName, lastName, roleId, managerId) {
   const query = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("${firstName}", "${lastName}", ${roleId}, ${managerId})`;
   return connection.promise().query(query);
 }
-// function to update an employee
 
+// function to update an employee
 function updateEmployeeRole(employeeId, roleId) {
   const query = `UPDATE employee SET role_id = ${roleId} WHERE id = ${employeeId}`;
   return connection.promise().query(query);
@@ -85,13 +67,41 @@ function deleteDepartment(departmentId) {
 }
 
 function deleteRole(roleId) {
-  const query = `DELETE FROM role WHERE id = ${roleId}`;
-  return connection.promise().query(query);
+  const selectQuery = `SELECT * FROM employee WHERE role_id = ${roleId}`;
+  return connection.promise().query(selectQuery)
+    .then(([rows]) => {
+      const updateQueries = rows.map((employee) => {
+        return `UPDATE employee SET role_id = NULL WHERE id = ${employee.id}`;
+      });
+      return Promise.all(updateQueries.map((query) => connection.promise().query(query)));
+    })
+    .then(() => {
+      const deleteQuery = `DELETE FROM role WHERE id = ${roleId}`;
+      return connection.promise().query(deleteQuery);
+    })
+    .catch((error) => {
+      console.log(`Error deleting role: ${error}`);
+    });
 }
 
 function deleteEmployee(employeeId) {
-  const query = `DELETE FROM employee WHERE id = ${employeeId}`;
-  return connection.promise().query(query);
+  const selectQuery = `SELECT * FROM employee WHERE id = ${employeeId}`;
+  return connection.promise().query(selectQuery)
+    .then(([rows]) => {
+      const employee = rows[0];
+      console.log("");
+
+      console.log(`Deleting employee: ${employee.first_name} ${employee.last_name}`);
+      const updateQuery = `UPDATE employee SET manager_id = NULL WHERE manager_id = ${employeeId}`;
+      return connection.promise().query(updateQuery);
+    })
+    .then(() => {
+      const deleteQuery = `DELETE FROM employee WHERE id = ${employeeId}`;
+      return connection.promise().query(deleteQuery);
+    })
+    .catch((error) => {
+      console.log(`Error deleting employee: ${error}`);
+    });
 }
 
 function viewEmployeesByManager(managerId) {
@@ -103,6 +113,8 @@ function viewEmployeesByManager(managerId) {
     WHERE e1.manager_id = ${managerId}`;
   return connection.promise().query(query)
     .then(([rows]) => {
+      console.log("");
+
       console.table(rows);
       return rows;
 
