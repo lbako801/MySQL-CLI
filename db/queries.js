@@ -101,7 +101,12 @@ function viewEmployeesByManager(managerId) {
     INNER JOIN department ON role.department_id = department.id
     LEFT JOIN employee AS e2 ON e1.manager_id = e2.id
     WHERE e1.manager_id = ${managerId}`;
-  return connection.promise().query(query);
+  return connection.promise().query(query)
+    .then(([rows]) => {
+      console.table(rows);
+      return rows;
+
+    });
 }
 
 function viewEmployeesByDepartment(departmentId) {
@@ -116,11 +121,11 @@ function viewEmployeesByDepartment(departmentId) {
 
 function viewDepartmentBudget(departmentId) {
   const query = `SELECT department.name AS department, SUM(role.salary) AS utilized_budget
-    FROM employee
-    INNER JOIN role ON employee.role_id = role.id
-    INNER JOIN department ON role.department_id = department.id
-    WHERE department.id = ${departmentId}
-    GROUP BY department.id`;
+  FROM department
+  JOIN role ON role.department_id = department.id
+  JOIN employee ON employee.role_id = role.id
+  WHERE department.id = ${departmentId}
+  GROUP BY department.id`;
   return connection.promise().query(query);
 }
 
