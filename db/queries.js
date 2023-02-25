@@ -40,26 +40,58 @@ function viewAllEmployees() {
 
 function addDepartment(departmentName) {
   const query = `INSERT INTO department (name) VALUES ("${departmentName}")`;
-  return connection.promise().query(query);
+  return connection.promise().query(query)
+    .then(() => {
+      console.log("");
+      console.log(`Added department: ${departmentName}`);
+    });
 }
-// function to add a role
 
+// function to add a role
 function addRole(title, salary, departmentId) {
   const query = `INSERT INTO role (title, salary, department_id) VALUES ("${title}", ${salary}, ${departmentId})`;
-  return connection.promise().query(query);
+  console.log("");
+  console.log(`Adding role "${title}" with salary $${salary} to department ID ${departmentId}...`);
+  return connection.promise().query(query).catch((error) => {
+    if (error.errno === 1264) {
+      console.log("");
+      console.log(`Error: Salary - $${salary} is too high! The maximum salary is $${Number.MAX_SAFE_INTEGER}.`);
+    } else {
+      throw error;
+    }
+  });
 }
 // function to add an employee
 
 function addEmployee(firstName, lastName, roleId, managerId) {
   const query = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("${firstName}", "${lastName}", ${roleId}, ${managerId})`;
-  return connection.promise().query(query);
+  return connection.promise().query(query)
+    .then(() => {
+      console.log("");
+      console.log(`Employee ${firstName} ${lastName} has been added with role ID ${roleId} and manager ID ${managerId}`);
+    });
 }
 
-// function to update an employee
+//' function to update an employee
+
 function updateEmployeeRole(employeeId, roleId) {
-  const query = `UPDATE employee SET role_id = ${roleId} WHERE id = ${employeeId}`;
-  return connection.promise().query(query);
+  const getEmployeeNameQuery = `SELECT CONCAT(first_name, " ", last_name) AS name FROM employee WHERE id = ${employeeId}`;
+  const updateEmployeeRoleQuery = `UPDATE employee SET role_id = ${roleId} WHERE id = ${employeeId}`;
+
+  return connection.promise().query(getEmployeeNameQuery)
+    .then(([rows]) => {
+      const employeeName = rows[0].name;
+      console.log("");
+      console.log(`Updating role for employee: ${employeeName}`);
+      return connection.promise().query(updateEmployeeRoleQuery);
+    })
+    .then(() => {
+      console.log("");
+      console.log(`Employee role updated successfully.`);
+      
+    });
 }
+
 
 function deleteDepartment(departmentId) {
   const query = `DELETE FROM department WHERE id = ${departmentId}`;
@@ -80,6 +112,7 @@ function deleteRole(roleId) {
       return connection.promise().query(deleteQuery);
     })
     .catch((error) => {
+      console.log("");
       console.log(`Error deleting role: ${error}`);
     });
 }
@@ -100,6 +133,7 @@ function deleteEmployee(employeeId) {
       return connection.promise().query(deleteQuery);
     })
     .catch((error) => {
+      console.log("");
       console.log(`Error deleting employee: ${error}`);
     });
 }

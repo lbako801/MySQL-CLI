@@ -7,7 +7,7 @@
     "mysql2": "^3.1.2"
   },
   "scripts": {
-    "cli-pro": "node start.js"
+    "clipro": "node start.js"
   },
   "name": "mysql-cli",
   "description": "Welcome to the Employee Database Management System! This is a command-line application that allows business owners to view and manage the departments, roles, and employees in their company. With this application, you can easily organize and plan your business.\r # Table of Contents\r - [MySQL-CLI- AN Employee Database Management System](#mysql-cli--an-employee-database-management-system)\r - [Table of Contents](#table-of-contents)\r - [Installation](#installation)\r - [Usage](#usage)\r - [Features](#features)\r - [Database Schema](#database-schema)\r - [Demo and Screenshots](#demo-and-screenshots)\r - [Author](#author)",
