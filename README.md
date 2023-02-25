@@ -24,7 +24,7 @@ To use the Employee Database Management System, follow these steps:
 
 2. Start the application by running the following command:
 ```
-npm run cli-pro
+npm run clipro
 ```
 3. You will be presented with a menu of options. Select the option you want to use by using the arrow keys to navigate and the Enter key to select.
 
