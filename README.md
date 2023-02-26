@@ -11,14 +11,15 @@ Welcome to the Employee Database Management System! This is a command-line appli
 - [Author](#author)
 
 # Installation
+First, clone this repository to your local machine with the following command:
+```
+git@github.com:lbako801/MySQL-CLI.git
+```
 To use the Employee Database Management System, you will need to have Node.js, MySQL2, Inquirer, and console.table installed on your computer. If you do not already have these packages installed, you can run the following command in your terminal to install them:
 ```
 npm install
 ```
-Once you have installed the necessary packages, you can clone this repository to your local machine with the following command:
-```
-git@github.com:lbako801/MySQL-CLI.git
-```
+
 
 # Usage 
 To use the Employee Database Management System, follow these steps:
